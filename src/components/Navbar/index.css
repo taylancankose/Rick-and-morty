@@ -1,0 +1,86 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  padding: 4rem 10rem 0 10rem;
+}
+
+.header_right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ul li {
+  list-style: none;
+  display: inline;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+#drawer a {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#drawer a:hover {
+  text-decoration: underline;
+}
+
+#drawer a:last-child {
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 1320px) {
+  .header_container {
+    margin: 2rem;
+  }
+  .logo {
+    width: 200px;
+  }
+
+  /* Header Styles */
+  .menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    display: inline;
+  }
+
+  #drawer {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Başlangıçta menüyü ekranın solunda saklıyoruz */
+    width: 250px;
+    height: 100%;
+    transition: left 0.3s ease;
+  }
+
+  #drawer ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.2rem;
+  }
+
+  #drawer li {
+    padding: 1rem;
+    cursor: pointer;
+    align-items: start;
+  }
+
+  #drawer a {
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+
+  #drawer.open {
+    left: 0; /* Menüyü açıkken ekranın soluna çıkarıyoruz */
+  }
+}
