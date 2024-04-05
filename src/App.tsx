@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import ThemeProvider from "./context/theme";
+import Characters from "./pages/Characters";
 import Home from "./pages/Home";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <div>
         <Navbar />
         <Home />
+        <Characters />
       </div>
     </ThemeProvider>
   );

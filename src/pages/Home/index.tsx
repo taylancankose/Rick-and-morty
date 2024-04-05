@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../context/theme";
-import "./index.css";
+import "./home.css";
 import DarkBG from "../../assets/dark-bg.png";
 import LightBG from "../../assets/light-bg.png";
 
@@ -9,12 +9,12 @@ function Home() {
   const { colors } = theme;
   return (
     <div
-      className="container"
+      className="home_container"
       style={{
         backgroundColor: colors.gray100,
       }}
     >
-      <div className="inner_container">
+      <div className="inner_home_container">
         <div id="title">
           <h1
             className="title"

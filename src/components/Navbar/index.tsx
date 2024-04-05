@@ -2,7 +2,7 @@ import Logo from "../../assets/rm.png";
 import ThemeSwitch from "../ThemeSwitch";
 import { ThemeContext } from "../../context/theme";
 import { useContext, useState } from "react";
-import "./index.css";
+import "./nav.css";
 
 function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <div
-      className="container"
+      className="nav_container"
       style={{
         backgroundColor: theme?.colors.gray100,
       }}
@@ -34,7 +34,13 @@ function Navbar() {
           >
             Menu
           </button>
-          <nav id="drawer" className={isDrawerOpen ? "open" : ""}>
+          <nav
+            style={{
+              backgroundColor: colors.gray80,
+            }}
+            id="drawer"
+            className={isDrawerOpen ? "open" : ""}
+          >
             <ul>
               <li>
                 <a

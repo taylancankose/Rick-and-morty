@@ -1,0 +1,35 @@
+.card_container {
+  margin: 8px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.card_image {
+  width: 90%;
+  border-radius: 10px;
+  margin-top: 14px !important;
+  margin: auto;
+}
+
+.card_body {
+  margin: 8px 14px;
+  font-size: 12px;
+}
+
+.card_title {
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.card_icon_container {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.card_status {
+  margin-left: 4px;
+}

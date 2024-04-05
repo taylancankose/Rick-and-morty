@@ -2,9 +2,10 @@ export type CharacterType = {
   id: string;
   image: string;
   name: string;
-  gender: string;
+  species: string;
   origin: {
     id: string;
-    dimension: string;
+    name: string;
   };
+  status: string;
 };

@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.container {
+.nav_container {
   padding: 4rem 10rem 0 10rem;
 }
 
@@ -42,6 +42,10 @@ ul li {
   }
   .logo {
     width: 200px;
+  }
+
+  .nav_container {
+    padding: 1rem;
   }
 
   /* Header Styles */

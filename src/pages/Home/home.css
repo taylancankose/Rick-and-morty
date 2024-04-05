@@ -1,8 +1,8 @@
-.container {
+.home_container {
   padding: 4rem 10rem 0 10rem;
 }
 
-.inner_container {
+.inner_home_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,12 +35,11 @@
 }
 
 @media screen and (max-width: 1320px) {
-  .container {
+  .home_container {
     padding: 0;
-    width: 100vw;
     overflow: hidden;
   }
-  .inner_container {
+  .inner_home_container {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
