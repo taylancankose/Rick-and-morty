@@ -34,13 +34,7 @@ function Navbar() {
           >
             Menu
           </button>
-          <nav
-            style={{
-              backgroundColor: colors.gray80,
-            }}
-            id="drawer"
-            className={isDrawerOpen ? "open" : ""}
-          >
+          <nav id="drawer" className={isDrawerOpen ? "open" : ""}>
             <ul>
               <li>
                 <a

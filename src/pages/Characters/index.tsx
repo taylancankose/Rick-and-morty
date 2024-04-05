@@ -1,25 +1,36 @@
 import { useQuery } from "@apollo/client";
-import { GET_ALL_CHARACTERS } from "./queries";
-import { useContext, useState } from "react";
+import { SEARCH_CHARACTERS } from "./queries";
+import { useContext, useState, useRef } from "react";
 import { CharacterType } from "../../types/types";
 import { ThemeContext } from "../../context/theme";
 import CharCard from "../../components/CharCard";
 import "./characters.css";
 
 function Characters() {
-  const [page, setPage] = useState<number>(1);
+  const [input, setInput] = useState("");
   const { theme } = useContext(ThemeContext);
   const { colors } = theme;
-  const { data, loading, error } = useQuery(GET_ALL_CHARACTERS, {
+
+  const { data, refetch } = useQuery(SEARCH_CHARACTERS, {
     variables: {
       page: 1,
+      name: input,
     },
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message} </p>;
+  const searchedChars = data?.characters?.results;
+  console.log(searchedChars);
 
-  const { results: characters } = data?.characters;
+  const formRef = useRef(null); // Form referansını oluştur
+
+  const handleSearch = (e) => {
+    e.preventDefault(); // Formun varsayılan davranışını durdur
+    refetch({ page: 1, name: input }); // Yeniden sorgula
+    // Formun olduğu yere kaydır
+    formRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div
@@ -28,12 +39,14 @@ function Characters() {
       }}
     >
       <div className="inner_char_container">
-        <div
+        <form
           style={{
             margin: "10px",
             marginBottom: 20,
             display: "flex",
           }}
+          onSubmit={handleSearch} // Form submit olduğunda handleSearch fonksiyonunu çağır
+          ref={formRef} // Forma referans ekle
         >
           <input
             style={{
@@ -47,11 +60,15 @@ function Characters() {
               fontSize: 14,
               color: colors.gray0,
             }}
+            value={input}
             type="text"
             placeholder="Character, episode, planet"
+            onChange={(e) => setInput(e.target.value)}
           />
-          <div></div>
-        </div>
+          <button type="submit" style={{ display: "none" }}>
+            Submit
+          </button>
+        </form>
         <div className="title_container">
           <h3
             style={{
@@ -72,7 +89,7 @@ function Characters() {
           </a>
         </div>
         <div className="character_container">
-          {characters.map((char: CharacterType) => {
+          {searchedChars?.map((char: CharacterType) => {
             return <CharCard char={char} />;
           })}
         </div>
