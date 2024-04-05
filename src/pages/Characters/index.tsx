@@ -1,34 +1,37 @@
 import { useQuery } from "@apollo/client";
 import { SEARCH_CHARACTERS } from "./queries";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState } from "react";
 import { CharacterType } from "../../types/types";
 import { ThemeContext } from "../../context/theme";
 import CharCard from "../../components/CharCard";
 import "./characters.css";
 
 function Characters() {
-  const [input, setInput] = useState("");
+  const [form, setForm] = useState({
+    input: "",
+    gender: "",
+  });
   const { theme } = useContext(ThemeContext);
   const { colors } = theme;
 
   const { data, refetch } = useQuery(SEARCH_CHARACTERS, {
     variables: {
       page: 1,
-      name: input,
+      name: form.input,
+      gender: form?.gender,
     },
   });
 
   const searchedChars = data?.characters?.results;
-  console.log(searchedChars);
 
-  const formRef = useRef(null); // Form referansını oluştur
-
-  const handleSearch = (e) => {
-    e.preventDefault(); // Formun varsayılan davranışını durdur
-    refetch({ page: 1, name: input }); // Yeniden sorgula
-    // Formun olduğu yere kaydır
-    formRef.current.scrollIntoView({
-      behavior: "smooth",
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    refetch({ page: 1, name: form.input });
+  };
+  const handleSelect = (e: any) => {
+    setForm({
+      ...form,
+      gender: e.target.value,
     });
   };
 
@@ -44,30 +47,106 @@ function Characters() {
             margin: "10px",
             marginBottom: 20,
             display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
-          onSubmit={handleSearch} // Form submit olduğunda handleSearch fonksiyonunu çağır
-          ref={formRef} // Forma referans ekle
+          onSubmit={handleSearch}
         >
-          <input
-            style={{
-              padding: 4,
-              width: "30%",
-              height: 50,
-              border: "none",
-              borderRadius: 55,
-              paddingLeft: 18,
-              backgroundColor: colors.gray80,
-              fontSize: 14,
-              color: colors.gray0,
-            }}
-            value={input}
-            type="text"
-            placeholder="Character, episode, planet"
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button type="submit" style={{ display: "none" }}>
-            Submit
-          </button>
+          <div>
+            <input
+              style={{
+                padding: 4,
+                width: 350,
+                height: 50,
+                border: "none",
+                borderRadius: 55,
+                paddingLeft: 18,
+                backgroundColor: colors.gray80,
+                fontSize: 14,
+                color: colors.gray0,
+              }}
+              value={form.input}
+              type="text"
+              name="input"
+              placeholder="Character, episode, planet"
+              onChange={(e) =>
+                setForm({ ...form, [e.target.name]: e.target.value })
+              }
+            />
+            <button type="submit" style={{ display: "none" }}>
+              Submit
+            </button>
+          </div>
+          <div>
+            <input
+              onClick={handleSelect}
+              type="radio"
+              name="gender"
+              value={"male"}
+              id="male"
+            />
+            <label
+              htmlFor="male"
+              style={{
+                color: colors.gray0,
+                marginRight: 10,
+                marginLeft: 4,
+              }}
+            >
+              Male
+            </label>
+            <input
+              onClick={handleSelect}
+              type="radio"
+              name="gender"
+              value={"female"}
+              id="femaile"
+            />
+            <label
+              htmlFor="female"
+              style={{
+                color: colors.gray0,
+                marginRight: 10,
+                marginLeft: 4,
+              }}
+            >
+              Female
+            </label>
+            <input
+              onClick={handleSelect}
+              type="radio"
+              name="gender"
+              value={"unknown"}
+              id="unknown"
+            />
+            <label
+              htmlFor="unknown"
+              style={{
+                color: colors.gray0,
+                marginRight: 10,
+                marginLeft: 4,
+              }}
+            >
+              Unknown
+            </label>
+            <input
+              onClick={handleSelect}
+              type="radio"
+              name="gender"
+              value={"genderless"}
+              id="genderless"
+            />
+            <label
+              style={{
+                color: colors.gray0,
+                marginRight: 10,
+                marginLeft: 4,
+              }}
+              htmlFor="genderless"
+            >
+              Genderless
+            </label>
+          </div>
         </form>
         <div className="title_container">
           <h3

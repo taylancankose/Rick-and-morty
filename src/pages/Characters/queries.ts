@@ -19,11 +19,30 @@ export const GET_ALL_CHARACTERS = gql`
 `;
 
 export const SEARCH_CHARACTERS = gql`
-  query ($page: Int!, $name: String!) {
-    characters(page: $page, filter: { name: $name }) {
+  query ($page: Int!, $gender: String, $name: String) {
+    characters(page: $page, filter: { gender: $gender, name: $name }) {
       info {
         count
       }
+      results {
+        id
+        name
+        status
+        image
+        species
+        gender
+        origin {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const FILTER_GENDER = gql`
+  query ($page: Int!, $gender: String!) {
+    characters(page: $page, filter: { gender: $gender }) {
       results {
         id
         name
